@@ -30,7 +30,7 @@ public class UIFornecedor{
             } else if (opcaoEscolhida == 3){
                 pesquisarFornecedorPorTipoDeServico();
             } else if (opcaoEscolhida == 4){
-                // pesquisarFornecedorPorCEP();
+                pesquisarFornecedorPorCEP();
             }
         }
         
@@ -104,6 +104,25 @@ public class UIFornecedor{
             System.out.println("Nenhum fornecedor encontrado!");
         }
 
+    }
+
+    private void pesquisarFornecedorPorCEP(){
+        int cep;
+        Fornecedor[] fornecedoresEncontrados;
+
+        System.out.println("Entre com o CEP dos fornecedores a serem encontrados");
+        cep = scanner.nextInt();
+        scanner.nextLine();
+
+        fornecedoresEncontrados = RepositorioFornecedor.getInstancia().pesquisarFornecedorPorCEP(cep);
+        
+        if (fornecedoresEncontrados.length > 0){
+            for (Fornecedor fornecedor : fornecedoresEncontrados){
+                System.out.println(fornecedor);
+            }
+        } else {
+            System.out.println("Nenhum fornecedor encontrado");
+        }
     }
 
     private Endereco criarEndereco(){
