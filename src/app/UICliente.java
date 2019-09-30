@@ -21,6 +21,7 @@ public class UICliente{
             System.out.print(">> ");
 
             opcaoEscolhida = scanner.nextInt();
+            scanner.nextLine();
 
             if (opcaoEscolhida == 0){
                 ready = false;
@@ -29,11 +30,11 @@ public class UICliente{
             } else if (opcaoEscolhida == 2) {
                 removerClientePorCodigo();
             } else if (opcaoEscolhida == 3){
-                // removerClientePorNome();
+                removerClientePorNome();
             } else if (opcaoEscolhida == 4){
-                // pesquisarClientePorCodigo();
+                pesquisarClientePorCodigo();
             } else if (opcaoEscolhida == 5){
-                // pesquisarClientePorBairro();
+                pesquisarClientePorBairro();
             }
         }
     }
@@ -59,7 +60,13 @@ public class UICliente{
         dataDeNascimento = criarData();
 
         Cliente cliente = new Cliente(codigo, nome, email, cpf, endereco, dataDeNascimento);
-        RepositorioCliente.getInstancia().inserirCliente(cliente);
+        boolean isInserido = RepositorioCliente.getInstancia().inserirCliente(cliente);
+
+        if (isInserido){
+            System.out.println("Cliente inserido com sucesso!");
+        } else{
+            System.out.println("Cliente não inserido");
+        }
     }
 
     private void removerClientePorCodigo(){
@@ -78,6 +85,51 @@ public class UICliente{
         }
     }
 
+    private void removerClientePorNome(){
+        String nome;
+        int quantidadeRemovida;
+
+        System.out.println("Qual o nome do cliente a ser removido?");
+        nome = scanner.nextLine();
+        quantidadeRemovida = RepositorioCliente.getInstancia().removerClientesPorNome(nome);
+        
+        System.out.println(quantidadeRemovida + " cliente(s) removidos!");
+
+
+    }
+
+    private void pesquisarClientePorCodigo(){
+        int codigo;
+        Cliente clienteEncontrado;
+
+        System.out.println("Entre com o código do cliente:");
+        codigo = scanner.nextInt(); scanner.nextLine();
+        clienteEncontrado = RepositorioCliente.getInstancia().pesquisarClientePorCodigo(codigo);
+
+        if (clienteEncontrado != null){
+            System.out.println(clienteEncontrado);
+        } else {
+            System.out.println("Nenhum cliente encontrado");
+        }
+    }
+
+    private void pesquisarClientePorBairro(){
+        String bairro;
+        Cliente[] clientesEncontrados;
+
+        System.out.println("Entre com o bairro do(s) cliente(s)");
+        bairro = scanner.nextLine();
+        clientesEncontrados = RepositorioCliente.getInstancia().pesquisarClientesPorBairro(bairro);
+
+        if (clientesEncontrados.length > 0){
+            for (Cliente cliente : clientesEncontrados) {
+                System.out.println(cliente);
+            }
+        } else {
+            System.out.println("Nenhum cliente encontrado");
+        }
+    }
+
     private Endereco criarEndereco(){
         String rua, bairro, complemento;
         int numero, cep;
@@ -88,8 +140,10 @@ public class UICliente{
         bairro = scanner.nextLine();
         System.out.println("Entre com o número:");
         numero = scanner.nextInt();
+        scanner.nextLine();
         System.out.println("Entre com a CEP:");
         cep = scanner.nextInt();
+        scanner.nextLine();
         System.out.println("Entre com a complemento:");
         complemento = scanner.nextLine();
 
@@ -102,10 +156,13 @@ public class UICliente{
 
         System.out.println("Entre com o dia:");
         dia = scanner.nextByte();
+        scanner.nextLine();
         System.out.println("Entre com o mês:");
         mes = scanner.nextByte();
+        scanner.nextLine();
         System.out.println("Entre com o ano:");
         ano = scanner.nextShort();
+        scanner.nextLine();
 
         return new Data(dia, mes, ano);
     }
