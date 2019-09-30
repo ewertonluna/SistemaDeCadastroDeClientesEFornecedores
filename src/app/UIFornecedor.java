@@ -26,11 +26,11 @@ public class UIFornecedor{
             } else if (opcaoEscolhida == 1){
                 inserirFornecedor();
             } else if (opcaoEscolhida == 2){
-                // removerFornecedorPorCNPJ();
+                removerFornecedorPorCNPJ();
             } else if (opcaoEscolhida == 3){
-                // pesquisarFornecedorPorTipoDeServico()
+                pesquisarFornecedorPorTipoDeServico();
             } else if (opcaoEscolhida == 4){
-                // pesquisarFornecedorPorCEP()
+                // pesquisarFornecedorPorCEP();
             }
         }
         
@@ -69,6 +69,41 @@ public class UIFornecedor{
         }
 
         
+    }
+
+    private void removerFornecedorPorCNPJ(){
+        String cnpj;
+        boolean isRemovido;
+
+        System.out.println("Entre com o CNPJ do fornecedor a ser removido");
+        cnpj = scanner.nextLine();
+
+        isRemovido = RepositorioFornecedor.getInstancia().removerFornecedorPorCNPJ(cnpj);
+
+        if (isRemovido){
+            System.out.println("Fornecedor removido com sucesso");
+        } else{
+            System.out.println("Não há fornecedor com esse CNPJ a ser removido");
+        }
+    }
+
+    private void pesquisarFornecedorPorTipoDeServico(){
+        String tipoDeServico;
+        Fornecedor[] fornecedoresEncontrados;
+
+        System.out.println("Entre com o tipo de serviço do fornecedor a ser removido:");
+        tipoDeServico = scanner.nextLine();
+
+        fornecedoresEncontrados = RepositorioFornecedor.getInstancia().pesquisarFornecedorPorTipoDeServico(tipoDeServico);
+
+        if (fornecedoresEncontrados.length > 0){
+            for (Fornecedor fornecedor : fornecedoresEncontrados){
+                System.out.println(fornecedor);
+            }
+        } else {
+            System.out.println("Nenhum fornecedor encontrado!");
+        }
+
     }
 
     private Endereco criarEndereco(){

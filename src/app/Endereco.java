@@ -1,7 +1,5 @@
 package app;
 
-import java.util.Scanner;
-
 public class Endereco{
     private String rua;
     private String bairro;
