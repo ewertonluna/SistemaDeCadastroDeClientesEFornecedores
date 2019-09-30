@@ -20,7 +20,7 @@ public class RepositorioFornecedor{
      * @return  int posição do array do fornecedor encontrado. Caso 
      *          nenhum fornecedor seja encontrado, retorna -1.
      */
-    public int existeFornecedor(Fornecedor fornecedorProcurado){
+    private int existeFornecedor(Fornecedor fornecedorProcurado){
         for (int i = 0; i < this.fornecedores.length; i++) {
             if (this.fornecedores[i] != null && this.fornecedores[i].equals(fornecedorProcurado)){
                 return i;
@@ -35,7 +35,7 @@ public class RepositorioFornecedor{
      * @return  int i posição do array, caso exista posição disponível,
      *          caso contrário, retorna -1
      */
-    public int vagaDisponivel(){
+    private int vagaDisponivel(){
         for (int i = 0; i < this.fornecedores.length; i++) {
             if (this.fornecedores[i] == null){
                 return i;

@@ -25,7 +25,8 @@ public class App {
                 UICliente uicliente = new UICliente();
                 uicliente.showMenu();
             } else if (opcaoEscolhida == 2){
-                // UIFornecedor.showMenu()
+                UIFornecedor uifornecedor = new UIFornecedor();
+                uifornecedor.showMenu();
             }
 
 

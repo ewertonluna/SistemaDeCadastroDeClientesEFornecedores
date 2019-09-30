@@ -1,5 +1,7 @@
 package app;
 
+import java.util.Scanner;
+
 public class Data{
     private byte dia;
     private byte mes;
